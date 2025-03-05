@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persons</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/list-style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="main-header">
+            <h1>Persons</h1>
+            <div class="header-buttons">
+                <a href="{% url 'persons-forms-create' %}" class="button primary"><i class="fas fa-plus"></i> Add Person</a>
+                <a href="{% url 'loans-forms-list' %}" class="button primary"><i class="fas fa-hand-holding-usd"></i> Loans</a>
+                <a href="{% url 'payments-forms-list' %}" class="button primary"><i class="fas fa-file-invoice"></i> Payments</a>
+                {% if user.is_authenticated %}
+                    <form method="post" action="{% url 'logout' %}" class="logout-form">
+                        {% csrf_token %}
+                        <button type="submit" class="button primary danger"><i class="fa-solid fa-right-from-bracket"></i>Logout</button>
+                    </form>
+                {% endif %}
+            </div>
+        </header>
+        <div class="filter-form">
+            <h2>Filtrar Personas</h2>
+            <form method="get">
+                {{ filter.form.as_p }}
+                <button type="submit" class="button primary"><i class="fas fa-filter"></i> Filtrar</button>
+                <a href="{% url 'persons-forms-list' %}" class="button secondary"><i class="fas fa-times"></i> Limpiar Filtros</a>
+            </form>
+        </div>
+        <ul class="objects-list">
+            {% for person in persons %}
+            <li>
+                <a href="{% url 'persons-forms-update' person.id %}"><b>{{ person }}</b></a>
+                <div class="objects-actions">
+                    <a href="{% url 'persons-forms-update' person.id %}" class="button small"><i class="fas fa-eye"></i> View</a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

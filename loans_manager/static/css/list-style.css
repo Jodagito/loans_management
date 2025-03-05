@@ -1,0 +1,207 @@
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --danger-color: #dc3545;
+    --background-color: #f4f7fa;
+    --text-color: #333;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition-speed: 0.3s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    padding: 20px;
+}
+
+h1 {
+    font-size: 2rem;
+    color: var(--text-color);
+    margin-bottom: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+    transition: color var(--transition-speed) ease;
+}
+
+a:hover {
+    color: darken(var(--primary-color), 10%);
+}
+
+ul.objects-list {
+    list-style: none;
+    padding: 0;
+}
+
+ul.objects-list li {
+    margin: 10px 0;
+    padding: 15px;
+    background-color: #f9fafb;
+    border-radius: var(--border-radius);
+    transition: background-color var(--transition-speed) ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ul.objects-list li:hover {
+    background-color: #f1f3f5;
+}
+
+ul.objects-list li a {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.object-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color var(--transition-speed) ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.button.primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.button.secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.button.danger {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.button.small {
+    padding: 5px 10px;
+    font-size: 0.9rem;
+}
+
+.button:hover {
+    opacity: 0.9;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.logout-form {
+    display: inline;
+    padding: 0;
+    background-color: transparent;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+input[type="date"] {
+    padding: 10px;
+    font-size: 1rem;
+    background-color: #ffffff;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    width: 250px;
+    max-width: 100%;
+    transition: border-color var(--transition-speed) ease;
+    display: block;
+}
+
+input[type="date"]:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+form button {
+    padding: 12px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color var(--transition-speed) ease;
+}
+
+form button:hover {
+    background-color: darken(var(--primary-color), 10%);
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .main-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    form {
+        padding: 15px;
+    }
+
+    ul.objects-list li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .objects-actions {
+        width: 100%;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
+}
+
+.filter-form {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.filter-form button {
+    margin-right: 10px;
+}

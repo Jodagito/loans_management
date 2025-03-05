@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if form.instance.pk %}Edit{% else %}Create{% endif %} Loan</title>
+    <script src="{% static 'js/actions.js' %}" defer></script>
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/form-style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="form-header">
+            <h1>{% if form.instance.pk %}Edit{% else %}Create{% endif %} Loan</h1>
+            <div class="header-buttons">
+                {% if form.instance.pk %}
+                    <a href="{% url 'payments-forms-create' form.instance.pk %}" class="button primary"><i class="fas fa-plus"></i>Add Payment</a>
+                    <a href="{% url 'payments-forms-by-loan' form.instance.pk %}" class="button primary"><i class="fas fa-file-invoice"></i>Get Payments</a>
+                    <a href="{% url 'loan-generate-loan-report' form.instance.pk %}" class="button primary"><i class="fas fa-file-pdf"></i>Generate Report</a>
+                {% endif %}
+            </div>
+        </header>
+        <form method="post" class="object-form">
+            {% csrf_token %}
+            <div class="form-fields">
+                {{ form.as_p }}
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="button primary" onclick="return confirmAction(event);"><i class="fas fa-save"></i> Save</button>
+                {% if form.instance.pk %}
+                    <a href="{% url 'loans-forms-delete' form.instance.pk %}" class="button small danger" onclick="return performAction(event, this);"><i class="fas fa-trash"></i> Delete</a>
+                {% endif %}
+                {% if form.person_pk.initial or form.instance.pk %}
+                    <a href="{% url 'persons-forms-update' form.person_pk.initial %}" class="button secondary"><i class="fas fa-times"></i> Cancel</a>
+                {% else %}
+                    <a href="{% url 'loans-forms-list' %}" class="button secondary"><i class="fas fa-times"></i> Cancel</a>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+</body>
+</html>

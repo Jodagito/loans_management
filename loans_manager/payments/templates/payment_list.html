@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payments</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/list-style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="main-header">
+            <h1>Payments</h1>
+            <div class="header-buttons">
+                <a href="{% url 'payments-forms-create' %}" class="button primary"><i class="fas fa-plus"></i>Add Payment</a>
+                <a href="{% url 'persons-forms-list' %}" class="button secondary"><i class="fas fa-home"></i>Go Home</a>
+            </div>
+        </header>
+        <div class="filter-form">
+            <h2>Filtrar Pagos</h2>
+            <form method="get">
+                {{ filter.form.as_p }}
+                <button type="submit" class="button primary"><i class="fas fa-filter"></i> Filtrar</button>
+                <a href="{% url 'payments-forms-list' %}" class="button secondary"><i class="fas fa-times"></i> Limpiar Filtros</a>
+            </form>
+        </div>
+        <ul class="objects-list">
+            {% if not payments %}
+                <br><h1>No Payments Found</h1>
+            {% else %}
+                {% for payment in payments %}
+                <li>
+                    <a href="{% url 'payments-forms-update' payment.id %}"><b>{{ payment }}</b></a>
+                    <div class="objects-actions">
+                        <a href="{% url 'payments-forms-update' payment.id %}" class="button small"><i class="fas fa-eye"></i> View</a>
+                    </div>
+                </li>
+                {% endfor %}
+            {% endif %}
+        </ul>
+    </div>
+</body>
+</html>
